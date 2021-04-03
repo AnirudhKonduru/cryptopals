@@ -119,6 +119,23 @@ def challenge6():
     return candidate_solutions
 
 
+def transpose(mat: list):
+    return [*zip(*mat)]
+
+
+def aes_decrypt_block(cipher_block: bytes, key: bytes):
+    init_state = transpose(
+        [tuple(cipher_block[i:i+4]) for i in range(0, 16, 4)])
+    key_matrix = transpose([tuple(key[i:i+4])for i in range(0, 16, 4)])
+
+
+def aes_decrypt(cipher: bytes, key: bytes):
+    block_size = len(key)
+    cipher_blocks = [cipher[i:i+block_size]
+                     for i in range(0, len(cipher), block_size)]
+    return b''.join([aes_decrypt_block(block, key) for block in cipher_blocks])
+
+
 def challenge7():
     # wget https://cryptopals.com/static/challenge-data/7.txt
     with open(datadir.joinpath("7.txt")) as f:

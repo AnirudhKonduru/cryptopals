@@ -48,7 +48,7 @@ def test_hamming_distance():
 
 
 def test_challenge7():
-    res :str = challenge7()
+    res: str = challenge7()
     assert res.startswith(b"I'm back and I'm ringin'")
 
 
